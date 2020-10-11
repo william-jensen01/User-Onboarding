@@ -20,7 +20,7 @@ export default function Form() {
     const [buttonIsDisabled, setButtonIsDisabled] = useState(true);
 
     // temporary state used to display response from API
-    const [users, setUsers] = useState([])
+    const [users, setUsers] = useState(null)
 
     // validating one key/value pair at a time
     const validateChange = (e) => {
@@ -95,6 +95,7 @@ export default function Form() {
                     name="name"
                     value={formState.name}
                     onChange={inputChange}
+                    data-cy="name"
                 />
                 {errors.name.length > 0 ? <p className="error">{errors.name}</p> : null}
             </label>
@@ -103,10 +104,11 @@ export default function Form() {
                 Email
                 <input
                     id="email"
-                    type="text"
+                    type="email"
                     name="email"
                     value={formState.email}
                     onChange={inputChange}
+                    data-cy="email"
                 />
                 {errors.email.length > 0 ? <p className="error">{errors.email}</p> : null}
             </label>
@@ -115,10 +117,11 @@ export default function Form() {
                 Password
                 <input
                     id="password"
-                    type="text"
+                    type="password"
                     name="password"
                     value={formState.password}
                     onChange={inputChange}
+                    data-cy="password"
                 />
                 {errors.password.length > 0 ? <p className="error">{errors.password}</p> : null}
             </label>
@@ -135,9 +138,9 @@ export default function Form() {
                 {errors.terms.length > 0 ? <p className="error">{errors.terms}</p> : null}
             </label>
 
-            <button type="submit" disabled={buttonIsDisabled}>Submit</button>
+            <button type="submit" disabled={buttonIsDisabled} data-cy="submit">Submit</button>
             <h2>This is the API response</h2>
-            <pre>{JSON.stringify(users, null, 5)}</pre>
+            {users && <pre>{JSON.stringify(users, null, 5)}</pre>}
         </form>
     )
 }
